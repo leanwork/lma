@@ -1,0 +1,33 @@
+# Infraestrutura de observabilidade para desenvolvimento local.
+# SQLite não precisa de container — o banco é um arquivo local.
+# Inicie com: docker compose up -d
+# Pare com:   docker compose down
+
+services:
+
+  # ─── Jaeger — traces distribuídos (OpenTelemetry OTLP) ──────────────────────
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: lmaapp-jaeger
+    ports:
+      - "16686:16686"    # UI: http://localhost:16686
+      - "4317:4317"      # OTLP gRPC receiver
+      - "4318:4318"      # OTLP HTTP receiver
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: unless-stopped
+
+  # ─── Seq — logs estruturados (Serilog sink) ─────────────────────────────────
+  seq:
+    image: datalust/seq:latest
+    container_name: lmaapp-seq
+    ports:
+      - "5341:80"        # UI + API: http://localhost:5341
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq-data:/data
+    restart: unless-stopped
+
+volumes:
+  seq-data:

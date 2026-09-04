@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <MsPackageVersion>10.0.*</MsPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LmaApp.Api\LmaApp.Api.csproj" />
+    <ProjectReference Include="..\..\src\LmaApp.Domain\LmaApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
+    <!-- 7.x é a última versão sob Apache-2.0; a 8.x exige licença comercial Xceed. -->
+    <PackageReference Include="FluentAssertions" Version="7.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(MsPackageVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(MsPackageVersion)" />
+    <!-- Testcontainers para testes com banco real (opcional — ver ApiFactory.cs) -->
+    <PackageReference Include="Testcontainers.MsSql" Version="*" />
+  </ItemGroup>
+
+</Project>

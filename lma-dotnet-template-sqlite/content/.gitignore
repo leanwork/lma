@@ -1,0 +1,37 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+*.swp
+
+## Secrets e config local
+appsettings.Local.json
+**/secrets.json
+
+## EF Core Migrations temporárias de dev
+# (manter as migrations em si no repositório)
+
+## SQLite dev
+*.db
+*.db-shm
+*.db-wal
+
+## Publicação
+publish/
+out/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+## Logs
+logs/
+*.log
+
+## OS
+.DS_Store
+Thumbs.db

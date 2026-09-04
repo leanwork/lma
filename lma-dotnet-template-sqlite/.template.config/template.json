@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Leanwork Group",
+  "classifications": ["API", "LMA", "Leanwork", "Web", "SQLite"],
+  "identity": "Leanwork.LMA.Sqlite.Template",
+  "name": "Lean Modular Architecture — SQLite",
+  "shortName": "lma-sqlite",
+  "description": "Template LMA v1.0 com SQLite (dev / testes / apps embarcadas) — dois projetos físicos, Minimal API, EF Core, Dapper, FluentValidation, Serilog, OpenTelemetry, configuração Claude Code (skills, commands, agent e hooks) incluída.",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "LmaApp",
+  "preferNameDirectory": true,
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "Target framework",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "net10.0", "description": ".NET 10 (latest)" },
+        { "choice": "net9.0",  "description": ".NET 9" },
+        { "choice": "net8.0",  "description": ".NET 8 (LTS)" }
+      ],
+      "defaultValue": "net10.0",
+      "replaces": "net10.0"
+    },
+    "MsPackageVersion": {
+      "type": "generated",
+      "generator": "switch",
+      "replaces": "10.0.*",
+      "parameters": {
+        "evaluator": "C++",
+        "datatype": "string",
+        "cases": [
+          { "condition": "(Framework == \"net9.0\")", "value": "9.0.*" },
+          { "condition": "(Framework == \"net8.0\")", "value": "8.0.*" },
+          { "condition": "",                          "value": "10.0.*" }
+        ]
+      }
+    },
+    "UseSeq": {
+      "type": "parameter",
+      "description": "Incluir sink Serilog para Seq (log aggregator)",
+      "datatype": "bool",
+      "defaultValue": "false"
+    },
+    "IncludeExampleModule": {
+      "type": "parameter",
+      "description": "Incluir módulo de exemplo (Produtos) pronto para rodar",
+      "datatype": "bool",
+      "defaultValue": "true"
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "description": "Incluir projeto de testes",
+      "datatype": "bool",
+      "defaultValue": "true"
+    }
+  },
+  "sources": [
+    {
+      "source": "./content",
+      "target": "./",
+      "modifiers": [
+        {
+          "condition": "(!IncludeTests)",
+          "exclude": ["tests/**"]
+        },
+        {
+          "condition": "(!IncludeExampleModule)",
+          "exclude": [
+            "src/LmaApp.Api/Modulos/Produtos/**",
+            "src/LmaApp.Api/Endpoints/ProdutosEndpoints.cs",
+            "src/LmaApp.Api/Infrastructure/Database/Configurations/ProdutoConfiguration.cs",
+            "src/LmaApp.Api/Migrations/**",
+            "src/LmaApp.Domain/Modulos/Produtos/**",
+            "tests/LmaApp.Tests/ProdutosTests.cs"
+          ]
+        }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "LmaApp.sln" },
+    { "path": "src/LmaApp.Api/LmaApp.Api.csproj" },
+    { "path": "src/LmaApp.Domain/LmaApp.Domain.csproj" },
+    {
+      "condition": "(IncludeTests)",
+      "path": "tests/LmaApp.Tests/LmaApp.Tests.csproj"
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore NuGet packages",
+      "manualInstructions": [{ "text": "Run 'dotnet restore'" }],
+      "actionId": "210D431B-A78B-4D2F-B2C5-E4EEDFD0DC27",
+      "continueOnError": true
+    }
+  ]
+}

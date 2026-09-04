@@ -1,0 +1,47 @@
+# Infraestrutura de desenvolvimento local.
+# Inicie com: docker compose up -d
+# Pare com:   docker compose down
+
+services:
+
+  # ─── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: lmaapp-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=LmaAppDb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # ─── Jaeger — traces distribuídos (OpenTelemetry OTLP) ──────────────────────
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: lmaapp-jaeger
+    ports:
+      - "16686:16686"    # UI: http://localhost:16686
+      - "4317:4317"      # OTLP gRPC receiver
+      - "4318:4318"      # OTLP HTTP receiver
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: unless-stopped
+
+  # ─── Seq — logs estruturados (Serilog sink) ─────────────────────────────────
+  seq:
+    image: datalust/seq:latest
+    container_name: lmaapp-seq
+    ports:
+      - "5341:80"        # UI + API: http://localhost:5341
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq-data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  seq-data:

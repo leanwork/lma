@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>LmaApp.Api</RootNamespace>
+    <UserSecretsId>lma-app-secrets</UserSecretsId>
+    <!-- Alinha os pacotes Microsoft/EF Core com o TargetFramework escolhido. -->
+    <MsPackageVersion>10.0.*</MsPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LmaApp.Domain\LmaApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ORM e acesso a dados -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(MsPackageVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MsPackageVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(MsPackageVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Dapper" Version="*" />
+
+    <!-- Banco de dados: SQL Server -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(MsPackageVersion)" />
+
+    <!-- Validação -->
+    <PackageReference Include="FluentValidation.AspNetCore" Version="*" />
+
+    <!-- API / Docs -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="*" />
+
+    <!-- Serilog -->
+    <PackageReference Include="Serilog.AspNetCore" Version="*" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="*" />
+    <PackageReference Include="Serilog.Sinks.File" Version="*" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="*" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="*" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="*" />
+<!--#if (UseSeq) -->
+    <PackageReference Include="Serilog.Sinks.Seq" Version="*" />
+<!--#endif -->
+
+    <!-- OpenTelemetry -->
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.15.1-beta.1" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="*" />
+  </ItemGroup>
+
+</Project>
