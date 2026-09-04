@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LMA — Lean Modular Architecture | Leanwork Group</title>
+<meta name="description" content="Arquitetura API-first para .NET. Modular por negócio, sem abstração preventiva e otimizada para o par humano + IA. Templates dotnet new para SQL Server, PostgreSQL e SQLite.">
+<meta name="author" content="Leanwork Group">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://leanwork.github.io/lma/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Leanwork Group">
+<meta property="og:title" content="LMA — Lean Modular Architecture">
+<meta property="og:description" content="Arquitetura API-first para .NET. Isola o que muda de verdade, não o que a teoria manda isolar.">
+<meta property="og:url" content="https://leanwork.github.io/lma/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+<!-- ====================================================== Navegação -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#topo" aria-label="LMA — Leanwork Group">
+      <img src="assets/leanwork-group-white.svg" alt="Leanwork Group" width="78" height="30">
+      <span class="divider" aria-hidden="true"></span>
+      <span class="mark">LMA</span>
+    </a>
+
+    <nav aria-label="Seções">
+      <ul class="nav-links">
+        <li><a href="#ideia">A ideia</a></li>
+        <li><a href="#codigo">O código</a></li>
+        <li><a href="#regras">As regras</a></li>
+        <li><a href="#quando">Quando usar</a></li>
+        <li><a href="#balanco">Prós e contras</a></li>
+        <li><a href="#ia">IA</a></li>
+        <li><a href="#templates">Templates</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <a class="nav-cta" href="https://github.com/leanwork/lma" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.6 5.6.6 12c0 5 3.3 9.3 7.8 10.8.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6a11.5 11.5 0 0 0 7.8-10.9C23.4 5.6 18.3.5 12 .5Z"/></svg>
+      GitHub
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="#ideia">A ideia</a>
+  <a href="#codigo">O código</a>
+  <a href="#regras">As regras</a>
+  <a href="#quando">Quando usar</a>
+  <a href="#balanco">Prós e contras</a>
+  <a href="#ia">IA</a>
+  <a href="#templates">Templates</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://github.com/leanwork/lma" target="_blank" rel="noopener">GitHub &#8599;</a>
+</div>
+
+<main id="conteudo">
+
+<!-- ====================================================== Hero -->
+<section class="hero" id="topo">
+  <div class="shell hero-grid">
+    <div>
+      <p class="eyebrow">Leanwork Group · Arquitetura .NET · v1.0</p>
+      <h1 class="display">
+        Lean Modular
+        <span class="thin">Architecture</span>
+      </h1>
+      <p class="lede">
+        Arquitetura API-first para .NET que vai direto ao ponto. Isola o que muda
+        de verdade — e o que muda é a infraestrutura externa, não o banco. Do MVP
+        de duas semanas ao sistema com 15 devs, a estrutura é a mesma.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#templates">
+          Instalar os templates
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#ideia">Entender a ideia</a>
+      </div>
+
+      <p class="hero-meta">
+        <span>Licença MIT</span>
+        <span>.NET 8, 9 e 10</span>
+        <span>3 templates <code>dotnet new</code></span>
+        <span>Minimal API + EF Core</span>
+      </p>
+    </div>
+
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">bash</span>
+      </div>
+      <pre><span class="prompt">$</span> <span class="cmd">git clone https://github.com/leanwork/lma.git</span>
+<span class="prompt">$</span> <span class="cmd">dotnet new install ./lma/lma-dotnet-template-sqlite</span>
+
+<span class="prompt">$</span> <span class="cmd">dotnet new lma-sqlite -n MinhaApi</span>
+<span class="prompt">$</span> <span class="cmd">cd MinhaApi &amp;&amp; dotnet run --project src/MinhaApi.Api</span>
+
+<span class="note"># API no ar, migration aplicada, Swagger aberto.</span>
+<span class="note"># Zero infraestrutura externa.</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== A ideia -->
+<section class="section" id="ideia">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">01 — A ideia</p>
+      <h2 class="headline">Isole o que muda de verdade.</h2>
+      <p>
+        Clean Architecture isola tudo por via das dúvidas. A LMA isola só o que
+        realmente troca — e cobra o preço de cada abstração antes de aceitá-la.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <blockquote class="quote reveal">
+        <p>
+          Separe por módulo de negócio e por ação. Isole o que muda de verdade —
+          e o que muda é a infraestrutura externa, não o banco. Otimize para que
+          a estrutura seja previsível e gerável.
+        </p>
+        <cite>Princípio fundador — LMA v1.0</cite>
+      </blockquote>
+
+      <div class="cards cards-3 reveal">
+        <article class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+          <span class="card-num">01</span>
+          <h3>Modularidade por negócio</h3>
+          <p>
+            O código se organiza por bounded context — Catálogo, Checkout,
+            Faturamento — e não por camada técnica. Cada módulo é coeso, tem seu
+            vocabulário e pode até ter o próprio banco.
+          </p>
+        </article>
+
+        <article class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="card-num">02</span>
+          <h3>Isolamento seletivo</h3>
+          <p>
+            Gateway de pagamento, storage e mensageria ficam atrás de interface,
+            porque a volatilidade é real. Persistência não. O banco raramente
+            troca — e quando troca, é refactor consciente, não abstração
+            preventiva.
+          </p>
+        </article>
+
+        <article class="card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg>
+          <span class="card-num">03</span>
+          <h3>Humanos <em>e</em> IA</h3>
+          <p>
+            Boa parte do código hoje é escrita com LLM. A LMA assume isso como
+            premissa de design: estrutura previsível, vocabulário fixo, decisões
+            já tomadas. Menos ambiguidade, menos variação inventada.
+          </p>
+        </article>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">Para que serve</h3>
+        <ul class="list">
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>APIs .NET em que a API <strong>é o produto</strong>, não um detalhe técnico.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Projetos rápidos — MVP, prova de conceito, SaaS inicial — que precisam de qualidade desde o dia 1.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Sistemas duradouros — ERP, marketplace, fintech, plataforma B2B — que precisam evoluir sem virar bagunça.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Times mistos onde a IA participa ativamente da geração de código.</span>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Sistemas modulares com múltiplos bancos — um por módulo, cada um no workload certo.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== O código -->
+<section class="section" id="codigo">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">02 — O código</p>
+      <h2 class="headline">Uma Ação. Um método. Um retorno.</h2>
+      <p>
+        Uma <strong>Ação</strong> é um vertical slice: uma classe, um método
+        <code>Execute</code>, retorno <code>Result&lt;T&gt;</code>. Sem Handler,
+        sem Service, sem MediatR, sem Repository. O exemplo abaixo é o código que
+        sai do template, sem edição.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="reveal">
+        <div class="tabs" role="tablist" aria-label="Exemplos de código LMA">
+          <button class="tab" id="tab-acao" role="tab" aria-selected="true" aria-controls="panel-acao">Ação</button>
+          <button class="tab" id="tab-endpoint" role="tab" aria-selected="false" aria-controls="panel-endpoint" tabindex="-1">Endpoint</button>
+          <button class="tab" id="tab-domain" role="tab" aria-selected="false" aria-controls="panel-domain" tabindex="-1">Domain</button>
+          <button class="tab" id="tab-models" role="tab" aria-selected="false" aria-controls="panel-models" tabindex="-1">Request &amp; Validator</button>
+        </div>
+
+        <div class="tab-panel" id="panel-acao" role="tabpanel" aria-labelledby="tab-acao">
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-path">src/MinhaApi.Api/Modulos/Produtos/CriarProduto/CriarProduto.cs</span>
+              <button class="copy" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar
+              </button>
+            </div>
+            <pre><code data-lang="csharp">public class CriarProduto(AppDbContext db, ILogger&lt;CriarProduto&gt; logger)
+{
+    public async Task&lt;Result&lt;CriarProdutoResponse&gt;&gt; Execute(
+        CriarProdutoRequest request,
+        CancellationToken ct)
+    {
+        // Regra de negócio vive no Domain, não aqui.
+        var resultado = Produto.Criar(
+            request.Nome, request.Descricao, request.Preco, request.EstoqueInicial);
+
+        if (resultado.IsFailure)
+            return Result.Failure&lt;CriarProdutoResponse&gt;(resultado.Error!);
+
+        var produto = resultado.Value!;
+        db.Produtos.Add(produto);
+        await db.SaveChangesAsync(ct);   // commit sempre explícito
+
+        logger.LogInformation(
+            "CriarProduto: produto criado. Id={ProdutoId}", produto.Id);
+
+        return Result.Success(new CriarProdutoResponse(
+            produto.Id, produto.Nome, produto.Preco, produto.EstoqueDisponivel));
+    }
+}</code></pre>
+          </div>
+          <p class="tab-note">
+            A Ação injeta <code>AppDbContext</code> direto. Não conhece HTTP, não
+            valida formato e não chama outra Ação.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="panel-endpoint" role="tabpanel" aria-labelledby="tab-endpoint" hidden>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-path">src/MinhaApi.Api/Endpoints/ProdutosEndpoints.cs</span>
+              <button class="copy" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar
+              </button>
+            </div>
+            <pre><code data-lang="csharp">public static class ProdutosEndpoints
+{
+    // TODAS as rotas do módulo Produtos vivem neste arquivo.
+    public static IEndpointRouteBuilder MapProdutosEndpoints(this IEndpointRouteBuilder app)
+    {
+        var grupo = app.MapGroup("/produtos")
+            .WithTags("Produtos")
+            .AddEndpointFilter&lt;ValidationFilter&gt;();   // validação automática
+
+        grupo.MapPost("/", async (
+            CriarProdutoRequest body,
+            CriarProduto acao,
+            CancellationToken ct) =&gt;
+        {
+            var resultado = await acao.Execute(body, ct);
+            return resultado.IsSuccess
+                ? Results.Created($"/produtos/{resultado.Value!.Id}", resultado.Value)
+                : Results.BadRequest(resultado.Error);
+        })
+        .WithName("CriarProduto")
+        .WithSummary("Cria um novo produto");
+
+        return app;
+    }
+}</code></pre>
+          </div>
+          <p class="tab-note">
+            É aqui que o protocolo web é resolvido: JWT, headers, route params. A
+            Ação recebe tudo limpo no Request.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="panel-domain" role="tabpanel" aria-labelledby="tab-domain" hidden>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-path">src/MinhaApi.Domain/Modulos/Produtos/Produto.cs</span>
+              <button class="copy" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar
+              </button>
+            </div>
+            <pre><code data-lang="csharp">public class Produto
+{
+    public Guid Id { get; private set; }
+    public string Nome { get; private set; } = string.Empty;
+    public decimal Preco { get; private set; }
+    public int EstoqueDisponivel { get; private set; }
+    public bool Ativo { get; private set; }
+
+    private Produto() { }   // EF Core reidrata por aqui
+
+    public static Result&lt;Produto&gt; Criar(string nome, string descricao, decimal preco, int estoque)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+            return Result.Failure&lt;Produto&gt;("Nome é obrigatório");
+
+        if (preco &lt;= 0)
+            return Result.Failure&lt;Produto&gt;("Preço deve ser maior que zero");
+
+        return Result.Success(new Produto { /* ... */ });
+    }
+
+    public Result ReservarEstoque(int quantidade)
+    {
+        if (!Ativo)
+            return Result.Failure("Produto inativo não pode ter estoque reservado");
+
+        if (EstoqueDisponivel &lt; quantidade)
+            return Result.Failure($"Estoque insuficiente. Disponível: {EstoqueDisponivel}");
+
+        EstoqueDisponivel -= quantidade;
+        return Result.Success();
+    }
+}</code></pre>
+          </div>
+          <p class="tab-note">
+            Setters privados, construtor privado, factory <code>Criar</code>.
+            Estado só muda por método de negócio — e este projeto não referencia
+            EF, ASP.NET nem FluentValidation.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="panel-models" role="tabpanel" aria-labelledby="tab-models" hidden>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-path">src/MinhaApi.Api/Modulos/Produtos/CriarProduto/CriarProdutoModels.cs</span>
+              <button class="copy" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar
+              </button>
+            </div>
+            <pre><code data-lang="csharp">public record CriarProdutoRequest(
+    string Nome, string Descricao, decimal Preco, int EstoqueInicial);
+
+public record CriarProdutoResponse(
+    Guid Id, string Nome, decimal Preco, int EstoqueDisponivel);
+
+// Roda no IEndpointFilter, antes da Ação. Se falhar, retorna 400
+// e a Ação nem chega a ser chamada.
+public class CriarProdutoValidator : AbstractValidator&lt;CriarProdutoRequest&gt;
+{
+    public CriarProdutoValidator()
+    {
+        RuleFor(x =&gt; x.Nome).NotEmpty().MaximumLength(200);
+        RuleFor(x =&gt; x.Preco).GreaterThan(0);
+        RuleFor(x =&gt; x.EstoqueInicial).GreaterThanOrEqualTo(0);
+    }
+}</code></pre>
+          </div>
+          <p class="tab-note">
+            Request, Response e Validator na mesma pasta da Ação. Pasta plana,
+            sem subpastas — a fatia inteira cabe em um <code>ls</code>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== As regras -->
+<section class="section" id="regras">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">03 — As regras</p>
+      <h2 class="headline">O compilador é o guardião.</h2>
+      <p>
+        Dois projetos físicos desde o dia 1. Não é convenção que o code review
+        pega depois — é barreira de build. O que a IA não pode fazer, ela não
+        consegue fazer.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="diagram reveal">
+        <div class="node">
+          <h4>MinhaApp.Api</h4>
+          <p>
+            Endpoints, Ações, Infrastructure. Minimal API, EF Core, Dapper,
+            FluentValidation, Serilog, OpenTelemetry.
+          </p>
+        </div>
+        <div class="arrow" aria-hidden="true">
+          <span>referencia</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+        <div class="node node--pure">
+          <h4>MinhaApp.Domain</h4>
+          <p>
+            Entidades ricas, Value Objects, Domain Services e
+            <code>Result&lt;T&gt;</code>. Zero <code>PackageReference</code> de
+            infraestrutura. Projeto puro.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">Os 7 “nunca faça”</h3>
+        <ul class="list list-num">
+          <li><span>Ação <strong>nunca</strong> injeta outra Ação.</span></li>
+          <li><span>Domain <strong>nunca</strong> importa framework de infraestrutura.</span></li>
+          <li><span>Ação <strong>nunca</strong> vê <code>HttpContext</code> ou <code>ClaimsPrincipal</code>.</span></li>
+          <li><span><strong>Nunca</strong> criar Repository ou Writer.</span></li>
+          <li><span>Ação <strong>nunca</strong> declara a própria rota.</span></li>
+          <li><span>Ação <strong>nunca</strong> valida formato manualmente.</span></li>
+          <li><span>Ação de escrita <strong>nunca</strong> retorna sem <code>SaveChangesAsync(ct)</code>.</span></li>
+        </ul>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">Os anti-padrões</h3>
+        <p class="muted" style="margin-bottom:var(--s-3);font-size:var(--t-14)">
+          Cada regra existe porque há um jeito tentador de quebrá-la. Estes são os
+          oito desvios mais comuns — e a correção de cada um.
+        </p>
+
+        <div class="accordion">
+          <details>
+            <summary><span class="tag">01</span> Ação injetando outra Ação <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">public class ProcessarPedido(AppDbContext db, CalcularFrete outraAcao) { }</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>consulta direta ao banco, ou mover a lógica compartilhada para um Domain Service. Fatias não se acoplam.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">02</span> Domain referenciando infraestrutura <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">// em MinhaApp.Domain
+using Microsoft.EntityFrameworkCore;</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>não compila se os projetos estiverem separados corretamente. Se você precisa de EF ali, a lógica está no projeto errado.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">03</span> Protocolo web vazando para a Ação <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">public class ProcessarPedido(AppDbContext db, IHttpContextAccessor http) { }</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>extrair o dado no Endpoint e passar limpo no Request. A Ação recebe <code>ClienteId</code>, não o JWT.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">04</span> Reintroduzir Repository <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">public interface IPedidoRepository { }</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>acesso direto via <code>AppDbContext</code> ou Dapper na Ação. Integração externa continua com interface — isso não é Repository.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">05</span> Validação manual dentro da Ação <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">if (string.IsNullOrEmpty(req.Nome))
+    return Result.Failure(...);   // já foi feito no filtro</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>validação de formato fica no Validator, que roda no <code>IEndpointFilter</code>. Na Ação, só regra de negócio — e ela vive no Domain.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">06</span> Ação declarando a própria rota <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">public class ProcessarPedido
+{
+    public static void Map(IEndpointRouteBuilder app) =&gt; app.MapPost(...);
+}</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>roteamento centralizado em <code>Endpoints/{Modulo}Endpoints.cs</code>. A Ação não conhece HTTP.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">07</span> Commit implícito ou esquecido <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">db.Pedidos.Add(pedido);
+return Result.Success(...);   // nada foi persistido</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span><code>await db.SaveChangesAsync(ct)</code> explícito na última linha transacional da Ação de escrita.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="tag">08</span> Abstrair persistência “por via das dúvidas” <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="content">
+              <div class="code"><pre><code data-lang="csharp">// criar IDbContext, IUnitOfWork genérico etc. para "desacoplar o EF"</code></pre></div>
+              <p class="fix"><b>Correção:</b> <span>a LMA assume que o banco não troca. A abstração que paga aluguel é a de integração externa, não a de banco.</span></p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== Quando usar -->
+<section class="section invert" id="quando">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">04 — Adequação</p>
+      <h2 class="headline">Quando usar. E quando não.</h2>
+      <p>
+        Nenhuma arquitetura serve para tudo. A LMA cobre uma gama ampla de
+        projetos API-first em .NET — mas há casos em que outra abordagem paga
+        melhor, e vale dizer isso em voz alta.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="split reveal">
+        <div class="panel panel--yes">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+            <h3>Use a LMA quando</h3>
+          </div>
+          <ul class="list">
+            <li><span>Você constrói uma <strong>API .NET</strong> e ela é o produto.</span></li>
+            <li><span>Quer <strong>MVP rápido sem perder qualidade arquitetural</strong> — pasta plana e zero cerimônia entregam isso.</span></li>
+            <li><span>Tem um sistema <strong>grande, com muitos módulos e times</strong>, e precisa que a modularidade segure a complexidade.</span></li>
+            <li><span>Espera <strong>evolução longa</strong> e quer um esqueleto que sustente crescimento sem virar bagunça.</span></li>
+            <li><span>Tem <strong>múltiplos bancos por módulo</strong> — Postgres, Mongo, ClickHouse. Isso é primeira classe na LMA.</span></li>
+            <li><span><strong>IA é parte ativa</strong> do processo de geração de código.</span></li>
+            <li><span>O time aceita <strong>acesso direto ao <code>DbContext</code></strong> na camada de aplicação.</span></li>
+          </ul>
+        </div>
+
+        <div class="panel panel--no">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            <h3>Considere outra quando</h3>
+          </div>
+          <ul class="list">
+            <li><span>Você precisa <strong>trocar de persistência por agregado</strong> dentro do mesmo módulo. Aí o Repository volta a pagar aluguel — na LMA, a troca é por módulo inteiro.</span></li>
+            <li><span>O domínio tem <strong>complexidade combinatória extrema</strong> — motor de regras de seguro, tributação, cálculo atuarial. DDD ortodoxo com camadas explícitas serve melhor.</span></li>
+            <li><span>Múltiplos runtimes/UIs compartilham a <strong>mesma lógica de aplicação</strong>, não só de domínio (web + desktop + CLI + mobile com a mesma orquestração).</span></li>
+            <li><span>Você precisa de <strong>rastreabilidade extrema</strong> entre regra de negócio e código, em ambiente altamente regulado.</span></li>
+            <li><span>O time tem <strong>aversão estrutural</strong> a <code>DbContext</code> na aplicação. É questão cultural legítima — não vale impor.</span></li>
+            <li><span>O projeto será integrado a um codebase que já segue <strong>Clean Architecture rigorosa</strong>. Misturar estilos cria confusão.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== Prós e contras -->
+<section class="section" id="balanco">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">05 — Balanço</p>
+      <h2 class="headline">O que você ganha e o que você paga.</h2>
+      <p>
+        Toda decisão de arquitetura é uma troca. Estas são as da LMA, sem
+        maquiagem: o que ela otimiza e o preço que cobra por isso.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="split reveal">
+        <div class="panel panel--yes">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+            <h3>Prós</h3>
+          </div>
+          <ul class="list">
+            <li><span><strong>Feature inteira em uma pasta.</strong> Ação, Request, Response e Validator lado a lado. Nada de caçar 12 arquivos em 4 projetos.</span></li>
+            <li><span><strong>Menos código para o mesmo resultado.</strong> Sem Repository, sem Writer, sem MediatR, sem AutoMapper, sem DTO em pasta central.</span></li>
+            <li><span><strong>Regras validadas pelo build.</strong> A separação física impede a violação em vez de detectá-la em revisão.</span></li>
+            <li><span><strong>Onboarding curto.</strong> O vocabulário é fixo: classe = verbo, método = <code>Execute</code>, retorno = <code>Result&lt;T&gt;</code>.</span></li>
+            <li><span><strong>Escala por adição.</strong> Funcionalidade nova é pasta nova. Não se mexe em Ação existente (OCP na prática).</span></li>
+            <li><span><strong>Múltiplos bancos por módulo</strong> sem ginástica — cada módulo aponta para o workload certo.</span></li>
+            <li><span><strong>IA erra menos.</strong> Estrutura previsível e decisões já tomadas reduzem a variação inventada pelo modelo.</span></li>
+            <li><span><strong>Teste que reflete produção.</strong> Integração via <code>WebApplicationFactory</code>, sem mock de banco.</span></li>
+          </ul>
+        </div>
+
+        <div class="panel panel--no">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg>
+            <h3>Contras</h3>
+          </div>
+          <ul class="list">
+            <li><span><strong>Sem unitário puro na Ação.</strong> Sem Repository não há o que mockar — o teste da Ação é de integração. O unitário sem mock fica no Domain.</span></li>
+            <li><span><strong>Acoplamento consciente ao ORM.</strong> Trocar o mecanismo de persistência de um módulo é refactor real, não troca de implementação.</span></li>
+            <li><span><strong>Sem camada de aplicação reutilizável.</strong> Se outro runtime precisar da mesma orquestração, não há Application layer para compartilhar.</span></li>
+            <li><span><strong>Alguma duplicação entre fatias.</strong> Ações não se chamam. Lógica repetida só sai por Domain Service — e nem tudo cabe lá.</span></li>
+            <li><span><strong>Choque cultural.</strong> Times formados em Clean Architecture costumam estranhar o <code>DbContext</code> na Ação.</span></li>
+            <li><span><strong>Disciplina de leitura.</strong> Sem Repository, consulta pesada mal escrita vaza direto para dentro da Ação.</span></li>
+            <li><span><strong>Ecossistema jovem.</strong> A LMA é da Leanwork: menos material de terceiros, menos respostas prontas no Stack Overflow.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span>
+          A inversão de dependência na LMA é <strong>seletiva</strong>: existe
+          onde a volatilidade é real (gateways, storage, mensageria) e não existe
+          onde ela é teórica (banco). Não é SOLID pela metade — é SOLID aplicado
+          onde ele se paga.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== IA -->
+<section class="section" id="ia">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">06 — Geração assistida</p>
+      <h2 class="headline">Desenhada para o par humano&nbsp;+&nbsp;IA.</h2>
+      <p>
+        Não se trata de arquitetura para a IA substituir gente. Trata-se de
+        reconhecer que o par humano + IA é a unidade real de produção de código
+        hoje — e que otimizar só para um dos dois desperdiça o outro.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="split reveal">
+        <div class="panel panel--no">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <h3>A fricção</h3>
+          </div>
+          <ul class="list">
+            <li><span><strong>Decisões abertas demais.</strong> “Isso é Use Case ou Service?” Cada pergunta sem resposta única é um ponto onde o modelo inventa uma variação diferente por feature.</span></li>
+            <li><span><strong>Estrutura dispersa.</strong> Uma feature toca de 8 a 15 arquivos em 4 projetos. Muito contexto para carregar, muito caminho para errar.</span></li>
+            <li><span><strong>Vocabulário variável.</strong> <code>Handle</code>, <code>Execute</code>, <code>Process</code>, <code>Run</code>. <code>XxxHandler</code>, <code>XxxService</code>, <code>XxxUseCase</code>. O modelo pula entre estilos.</span></li>
+          </ul>
+        </div>
+
+        <div class="panel panel--yes">
+          <div class="panel-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <h3>A resposta da LMA</h3>
+          </div>
+          <ul class="list">
+            <li><span><strong>Estrutura rasa e previsível.</strong> Toda Ação vive em <code>Modulos/{Modulo}/{Acao}/</code>. O modelo sabe onde criar e onde procurar.</span></li>
+            <li><span><strong>Vocabulário fechado.</strong> Classe = verbo de negócio. Método = <code>Execute</code>. Retorno = <code>Result&lt;T&gt;</code>. Não há o que inventar.</span></li>
+            <li><span><strong>Guardrail de compilador.</strong> Tentar importar EF no Domain não compila. Não é “o review pega depois”: é erro de build imediato.</span></li>
+            <li><span><strong>Validação e roteamento centralizados.</strong> Menos código gerado, menos chance de esquecer.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">Suporte a IA já vem no template</h3>
+        <p class="muted" style="margin-bottom:var(--s-3);font-size:var(--t-14)">
+          Todo projeto gerado traz uma pasta <code>.claude/</code> configurada. O
+          Claude Code carrega tudo automaticamente, sem instalação. O
+          <code>CLAUDE.md</code> na raiz também serve Cursor, Copilot e afins.
+        </p>
+        <div class="cards cards-2">
+          <article class="card">
+            <span class="card-num">3 skills</span>
+            <h3>Ativam por contexto</h3>
+            <p>
+              <code>lma-create-action</code>, <code>lma-add-module</code> e
+              <code>lma-refactor-to-rich</code>. Basta dizer “criar ação para
+              listar clientes” e a fatia inteira sai no padrão.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-num">3 commands</span>
+            <h3>Atalhos explícitos</h3>
+            <p>
+              <code>/lma-docs</code>, <code>/lma-review</code> e
+              <code>/lma-init</code> para consultar a arquitetura, revisar e
+              inicializar.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-num">1 subagent</span>
+            <h3>Revisão arquitetural</h3>
+            <p>
+              <code>lma-reviewer</code> faz a leitura profunda do diff contra as
+              regras da LMA antes de o PR sair.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-num">2 hooks</span>
+            <h3>Validação a cada escrita</h3>
+            <p>
+              Checam as 8 convenções LMA a cada <code>Write</code>/<code>Edit</code>
+              em <code>.cs</code> e devolvem as violações para a IA corrigir
+              sozinha. Requerem bash (Git Bash ou WSL no Windows).
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== Templates -->
+<section class="section invert" id="templates">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">07 — Templates</p>
+      <h2 class="headline">Três templates. Um comando.</h2>
+      <p>
+        Cada template gera uma solução pronta para rodar: dois projetos físicos,
+        Minimal API, EF Core, observabilidade configurada, testes de integração
+        passando e a pasta <code>.claude/</code> completa.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="cards cards-3 reveal">
+        <article class="tpl">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+          <h3>SQL Server</h3>
+          <span class="short">lma-mssql</span>
+          <p>SQL Server e Azure SQL. Testcontainers do provider já referenciado.</p>
+        </article>
+        <article class="tpl">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+          <h3>PostgreSQL</h3>
+          <span class="short">lma-pg</span>
+          <p>Npgsql. <code>docker compose up -d</code> sobe banco, Jaeger e Seq.</p>
+        </article>
+        <article class="tpl">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+          <h3>SQLite</h3>
+          <span class="short">lma-sqlite</span>
+          <p>Sem infraestrutura externa. A arquitetura no ar em 30 segundos.</p>
+        </article>
+      </div>
+
+      <p class="muted" style="font-size:var(--t-14)">
+        Os três são idênticos exceto pelo provider EF Core, connection string,
+        migration inicial e <code>docker-compose.yml</code>.
+      </p>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">1. Instalar</h3>
+        <div class="code">
+          <div class="code-bar">
+            <span class="code-path">bash</span>
+            <button class="copy" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              Copiar
+            </button>
+          </div>
+          <pre><code data-lang="bash">git clone https://github.com/leanwork/lma.git
+cd lma
+
+dotnet new install ./lma-dotnet-template-sqlserver
+dotnet new install ./lma-dotnet-template-postgres
+dotnet new install ./lma-dotnet-template-sqlite</code></pre>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">2. Gerar e rodar</h3>
+        <div class="code">
+          <div class="code-bar">
+            <span class="code-path">bash</span>
+            <button class="copy" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              Copiar
+            </button>
+          </div>
+          <pre><code data-lang="bash">dotnet new lma-pg -n Faturamento
+cd Faturamento
+
+docker compose up -d                        # banco + Jaeger + Seq
+dotnet run --project src/Faturamento.Api    # migration aplicada automaticamente
+dotnet test                                 # 11 testes de integração, sem Docker</code></pre>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">3. Ajustar as opções</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Opção</th><th>Valores</th><th>Padrão</th><th>O que faz</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono">--Framework</span></td>
+                <td class="muted"><span class="mono">net10.0</span>, <span class="mono">net9.0</span>, <span class="mono">net8.0</span></td>
+                <td class="muted"><span class="mono">net10.0</span></td>
+                <td class="muted">TFM e alinhamento das versões de pacote</td>
+              </tr>
+              <tr>
+                <td><span class="mono">--IncludeExampleModule</span></td>
+                <td class="muted"><span class="mono">true</span>, <span class="mono">false</span></td>
+                <td class="muted"><span class="mono">true</span></td>
+                <td class="muted">Módulo Produtos completo — 3 Ações e seus testes</td>
+              </tr>
+              <tr>
+                <td><span class="mono">--IncludeTests</span></td>
+                <td class="muted"><span class="mono">true</span>, <span class="mono">false</span></td>
+                <td class="muted"><span class="mono">true</span></td>
+                <td class="muted">Projeto de testes de integração</td>
+              </tr>
+              <tr>
+                <td><span class="mono">--UseSeq</span></td>
+                <td class="muted"><span class="mono">true</span>, <span class="mono">false</span></td>
+                <td class="muted"><span class="mono">false</span></td>
+                <td class="muted">Sink Serilog para Seq</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="code" style="margin-top:var(--s-2)">
+          <div class="code-bar">
+            <span class="code-path">Projeto limpo, sem exemplo, em .NET 8 LTS</span>
+            <button class="copy" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              Copiar
+            </button>
+          </div>
+          <pre><code data-lang="bash">dotnet new lma-mssql -n MinhaApi --IncludeExampleModule false --Framework net8.0</code></pre>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 class="subhead" style="margin-bottom:var(--s-3)">O que vem no projeto gerado</h3>
+        <pre class="tree">src/
+├── <b>MinhaApi.Domain/</b>            <i># Entidades ricas, Value Objects, Result&lt;T&gt; — zero infra</i>
+└── <b>MinhaApi.Api/</b>
+    ├── Modulos/{Modulo}/{Acao}/    <i># Vertical slices</i>
+    ├── Endpoints/                  <i># Roteamento centralizado por módulo</i>
+    ├── Infrastructure/Database/    <i># AppDbContext + configurations</i>
+    └── Common/                     <i># ValidationFilter, ExceptionMiddleware, Serilog, OTel</i>
+
+tests/<b>MinhaApi.Tests/</b>           <i># Integração via WebApplicationFactory + EF InMemory</i>
+<b>.claude/</b>                        <i># Skills, commands, subagent e hooks LMA</i>
+<b>docs/architecture/</b>              <i># LMA v1.0, templates de Ação, checklist de PR</i>
+<b>docker-compose.yml</b>              <i># Banco + Jaeger + Seq</i>
+<b>CLAUDE.md</b>                       <i># Guia de arquitetura para IA</i></pre>
+        <p class="tab-note">
+          <strong>Stack:</strong> Minimal API, EF Core, Dapper, FluentValidation
+          (via <code>IEndpointFilter</code>), Serilog, OpenTelemetry (OTLP →
+          Jaeger), Swashbuckle, xUnit e FluentAssertions.
+        </p>
+      </div>
+
+      <div class="reveal stack-2">
+        <h3 class="subhead">Estado dos templates</h3>
+        <div class="figures">
+          <div class="figure"><b>3 × 6</b><span>templates × combinações de opções validadas</span></div>
+          <div class="figure"><b>0</b><span>erros e avisos de compilação</span></div>
+          <div class="figure"><b>11</b><span>testes de integração passando</span></div>
+          <div class="figure"><b>10.0.400</b><span>.NET SDK usado na validação</span></div>
+        </div>
+        <div class="callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>
+            Os testes usam EF Core InMemory e <strong>não exigem Docker</strong>.
+            Os templates SQL Server e PostgreSQL já referenciam o Testcontainers
+            correspondente — basta descomentar o container em
+            <code>tests/*/ApiFactory.cs</code> para rodar contra um banco real.
+            <code>FluentAssertions</code> está fixado em <code>7.*</code>, a
+            última versão sob Apache-2.0: a 8.x exige licença comercial Xceed.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== FAQ -->
+<section class="section" id="faq">
+  <div class="shell section-grid">
+    <header class="section-head">
+      <p class="eyebrow">08 — FAQ</p>
+      <h2 class="headline">Perguntas diretas.</h2>
+      <p>
+        As dúvidas que aparecem em toda primeira conversa sobre a LMA — com a
+        resposta curta. O documento completo tem 20 seções e vai junto em todo
+        projeto gerado.
+      </p>
+    </header>
+
+    <div class="section-body">
+      <div class="accordion reveal">
+        <details>
+          <summary>Sem Repository, como testo uma Ação isoladamente? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Você não testa isoladamente. A Ação é testada por integração, com <code>WebApplicationFactory</code> e Testcontainers. A lógica pura, testável sem mock, vive no Domain — entidades e Domain Services — e essa sim tem teste unitário.</p></div>
+        </details>
+        <details>
+          <summary>Posso usar EF e Dapper no mesmo projeto? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Sim, e é encorajado. EF para escrita e leitura com produtividade; Dapper para leituras de alta performance — relatórios, listagens pesadas. A Ação injeta o que precisar.</p></div>
+        </details>
+        <details>
+          <summary>Posso ter múltiplos bancos por módulo? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content">
+            <p>Sim — é um dos casos em que a LMA brilha. Cada módulo pode ter seu próprio <code>DbContext</code> ou conexão apontando para o banco mais adequado ao workload: <code>Catalogo</code> em Postgres, <code>Auditoria</code> em Mongo, <code>Analytics</code> em ClickHouse.</p>
+            <p>Quando os bancos são diferentes, a separação é ainda mais natural: não há como uma Ação de Analytics escrever, por engano, em tabela do Catálogo.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Como faço uma transação que envolve gateway de pagamento? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Com <code>db.Database.BeginTransactionAsync(ct)</code> explícito na Ação. Persista o pedido como pendente, chame o gateway e, conforme o resultado, faça commit ou rollback. O controle transacional fino é responsabilidade da Ação.</p></div>
+        </details>
+        <details>
+          <summary>Onde fica a lógica de extrair o ClienteId do JWT? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Estritamente no Endpoint. A Ação recebe <code>ClienteId</code> já limpo no Request e nunca vê <code>HttpContext</code> ou <code>ClaimsPrincipal</code>.</p></div>
+        </details>
+        <details>
+          <summary>Como dois módulos compartilham uma regra de negócio? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Via Domain Service em <code>MinhaApp.Domain</code>. As duas Ações usam o Domain Service. Ações nunca se chamam diretamente.</p></div>
+        </details>
+        <details>
+          <summary>O Validator roda dentro da Ação? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Não. Roda automaticamente no <code>IEndpointFilter</code> aplicado ao grupo de endpoints, antes da Ação. Se falhar, retorna 400 e a Ação nem é chamada.</p></div>
+        </details>
+        <details>
+          <summary>Como registro as Ações no DI? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Uma linha por Ação — <code>AddScoped&lt;ProcessarPedido&gt;()</code> — ou via scan de assembly, registrando todas as classes do namespace <code>Modulos</code>. Em projeto grande, o scan reduz boilerplate.</p></div>
+        </details>
+        <details>
+          <summary>A LMA serve para MVP rápido ou só para projeto grande? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Os dois. No MVP você começa com o Domain quase vazio e poucos módulos na API. A estrutura é a mesma de um projeto grande, só com menos arquivos. Não existe “versão simplificada da LMA” — ela já é simples.</p></div>
+        </details>
+        <details>
+          <summary>Por que dois projetos físicos desde o dia 1? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content"><p>Porque separar depois é caro e ninguém faz. Começar com dois deixa o compilador como guardião desde a primeira linha, e o custo inicial é zero — um <code>dotnet new classlib</code> a mais. Para IA gerando código, essa barreira física previne a maior parte dos erros de dependência.</p></div>
+        </details>
+        <details>
+          <summary>Qual a relação com a LVA? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="content">
+            <p>A LMA consolida a Lean Vertical Architecture com cinco mudanças estruturais: dois projetos físicos obrigatórios; roteamento centralizado por módulo; unificação de Reader e Handler numa única classe de Ação; eliminação completa de Repository e Writer; e validação automática via <code>IEndpointFilter</code>.</p>
+            <p>Cada mudança tem dupla justificativa — simplifica para o humano e reduz a superfície de erro para a IA.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== CTA -->
+<section class="cta">
+  <div class="shell">
+    <p class="eyebrow" style="text-align:center">Comece agora</p>
+    <h2 class="display">30 segundos até a primeira Ação.</h2>
+    <p class="lede">
+      O template SQLite sobe sem nenhuma infraestrutura externa. Clone, instale,
+      gere e rode — a arquitetura inteira funcionando na sua máquina.
+    </p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://github.com/leanwork/lma" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.6 5.6.6 12c0 5 3.3 9.3 7.8 10.8.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6a11.5 11.5 0 0 0 7.8-10.9C23.4 5.6 18.3.5 12 .5Z"/></svg>
+        Ver o repositório
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/leanwork/lma/blob/main/lma-dotnet-template-sqlserver/content/docs/architecture/lma-v1.0.md" target="_blank" rel="noopener">
+        Ler a LMA v1.0 completa
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================================================== Rodapé -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-top">
+      <div class="signature">
+        <img src="assets/leanwork-group-white.svg" alt="Leanwork Group" width="116" height="45">
+        <span class="divider" aria-hidden="true"></span>
+        <span class="slogan">live the <b>experience</b></span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/leanwork/lma" target="_blank" rel="noopener">Repositório</a></li>
+        <li><a href="https://github.com/leanwork/lma/blob/main/lma-dotnet-template-sqlserver/content/docs/architecture/lma-v1.0.md" target="_blank" rel="noopener">LMA v1.0</a></li>
+        <li><a href="https://github.com/leanwork/lma/issues" target="_blank" rel="noopener">Issues</a></li>
+        <li><a href="https://github.com/leanwork/lma/blob/main/LICENSE" target="_blank" rel="noopener">Licença MIT</a></li>
+      </ul>
+    </div>
+    <div class="footer-base">
+      <span>© <span id="ano">2026</span> Leanwork Group. Lean Modular Architecture v1.0.</span>
+      <span>Distribuído sob licença MIT.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
